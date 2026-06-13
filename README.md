@@ -20,7 +20,7 @@ ML model to detect fraudulent credit card transactions, deployed as a live REST 
 - **Random Forest** for robustness and interpretability
 
 ## Live API
-https://fraud-detection-api.onrender.com/docs
+https://fraud-detection-api-kt28.onrender.com/docs
 
 ## How to Run Locally
 pip install -r requirements.txt
