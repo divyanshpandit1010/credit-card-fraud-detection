@@ -56,9 +56,9 @@ def predict(t: Transaction):
     probability = model.predict_proba(features)[0][1]
 
 # Lower threshold to 0.3 instead of default 0.5
-is_fraud = bool(probability >= 0.3)
+    is_fraud = bool(probability >= 0.3)
 
-return {
+    return {
     "is_fraud": is_fraud,
     "fraud_probability": round(float(probability), 4),
     "risk_level": "HIGH" if probability > 0.7 else "MEDIUM" if probability > 0.3 else "LOW"
