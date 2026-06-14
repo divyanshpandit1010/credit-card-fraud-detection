@@ -25,3 +25,7 @@ https://fraud-detection-api-kt28.onrender.com/docs
 ## How to Run Locally
 pip install -r requirements.txt
 uvicorn app:app --reload
+## Author
+**Divyansh Pandit**
+- GitHub: [@divyanshpandit1010](https://github.com/divyanshpandit1010)
+- Email: divyanshpandit1010@gmail.com
