@@ -2,14 +2,19 @@
 Credit Card Fraud Detection API
 Author: Divyansh Pandit
 GitHub: github.com/divyanshpandit1010
-Version: 1.0.0
 """
+
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import numpy as np
 
 app = FastAPI(title="Credit Card Fraud Detector")
+
+app.add_middleware(CORSMiddleware, allow_origins=["*"],
+                   allow_methods=["*"], allow_headers=["*"])
 
 model = joblib.load("fraud_model.pkl")
 scaler = joblib.load("scaler.pkl")
@@ -26,10 +31,11 @@ class Transaction(BaseModel):
 
 @app.get("/")
 def home():
-    return {
-        "message": "Fraud Detection API is live!",
-        "status": "healthy"
-    }
+    return FileResponse("dashboard.html")
+
+@app.get("/dashboard")
+def dashboard():
+    return FileResponse("dashboard.html")
 
 @app.post("/predict")
 def predict(t: Transaction):
