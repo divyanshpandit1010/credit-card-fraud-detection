@@ -1,3 +1,9 @@
+"""
+Credit Card Fraud Detection API
+Author: Divyansh Pandit
+GitHub: github.com/divyanshpandit1010
+Version: 1.0.0
+"""
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
