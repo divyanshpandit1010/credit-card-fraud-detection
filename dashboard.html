@@ -9,31 +9,29 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #0f172a; color: white; padding: 20px; }
         h1 { color: #60a5fa; font-size: 22px; margin-bottom: 5px; }
-        p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
-        .author { color: #64748b; font-size: 12px; margin-bottom: 30px; }
-        .stats { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+        .sub { color: #94a3b8; font-size: 13px; margin-bottom: 5px; }
+        .author { color: #64748b; font-size: 12px; margin-bottom: 25px; }
+        .stats { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
         .stat { background: #1e293b; border-radius: 10px; padding: 15px 20px; flex: 1; min-width: 140px; }
         .stat .label { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
         .stat .value { font-size: 24px; font-weight: bold; }
-        .blue { color: #60a5fa; }
-        .red { color: #f87171; }
-        .green { color: #34d399; }
-        .yellow { color: #fbbf24; }
+        .blue { color: #60a5fa; } .red { color: #f87171; }
+        .green { color: #34d399; } .yellow { color: #fbbf24; }
         .section { background: #1e293b; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
         .section h2 { font-size: 14px; color: #94a3b8; margin-bottom: 15px; text-transform: uppercase; }
         .btn { padding: 12px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: bold; margin: 5px; }
         .btn-normal { background: #1d4ed8; color: white; }
         .btn-fraud { background: #dc2626; color: white; }
         .btn-random { background: #7c3aed; color: white; }
+        .btn-upload { background: #0891b2; color: white; }
         .result { border-radius: 10px; padding: 20px; margin-top: 15px; display: none; }
         .result-normal { background: #064e3b; border: 1px solid #34d399; }
         .result-fraud { background: #450a0a; border: 1px solid #f87171; }
         .result h3 { font-size: 20px; margin-bottom: 8px; }
-        .result p { color: #cbd5e1; margin-bottom: 10px; font-size: 14px; }
         .bar-bg { background: #334155; border-radius: 99px; height: 10px; }
         .bar-fill { height: 10px; border-radius: 99px; transition: width 0.8s; }
         .loading { color: #60a5fa; padding: 15px 0; display: none; }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
         th { text-align: left; padding: 8px; color: #64748b; border-bottom: 1px solid #334155; }
         td { padding: 8px; border-bottom: 1px solid #0f172a; }
         .badge { padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: bold; }
@@ -43,31 +41,40 @@
         .b-medium { background: #422006; color: #fbbf24; }
         .b-low { background: #064e3b; color: #34d399; }
         canvas { max-height: 200px; margin-top: 10px; }
+        .upload-box {
+            border: 2px dashed #334155;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .upload-box:hover { border-color: #60a5fa; }
+        .upload-box input { display: none; }
+        .upload-icon { font-size: 40px; margin-bottom: 10px; }
+        .upload-text { color: #94a3b8; font-size: 14px; margin-bottom: 5px; }
+        .upload-hint { color: #64748b; font-size: 12px; }
+        .progress-bar { background: #334155; border-radius: 99px; height: 8px; margin: 10px 0; display: none; }
+        .progress-fill { height: 8px; border-radius: 99px; background: #60a5fa; transition: width 0.3s; width: 0%; }
+        .csv-stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        .csv-stat { background: #0f172a; border-radius: 8px; padding: 10px 15px; flex: 1; min-width: 100px; }
+        .csv-stat .cl { font-size: 11px; color: #64748b; }
+        .csv-stat .cv { font-size: 18px; font-weight: bold; }
+        .download-btn { background: #059669; color: white; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <h1>🛡️ Fraud Detection Dashboard</h1>
-<p>Real-time Credit Card Fraud Detection System</p>
-<div class="author">Built by Divyansh Pandit &nbsp;|&nbsp; github.com/divyanshpandit1010</div>
+<p class="sub">Real-time Credit Card Fraud Detection System</p>
+<div class="author">Built by Divyansh Pandit | github.com/divyanshpandit1010</div>
 
 <div class="stats">
-    <div class="stat">
-        <div class="label">Total Transactions</div>
-        <div class="value blue">284,807</div>
-    </div>
-    <div class="stat">
-        <div class="label">Fraud Cases</div>
-        <div class="value red">492</div>
-    </div>
-    <div class="stat">
-        <div class="label">F1-Score</div>
-        <div class="value green">87%</div>
-    </div>
-    <div class="stat">
-        <div class="label">ROC-AUC</div>
-        <div class="value yellow">0.97</div>
-    </div>
+    <div class="stat"><div class="label">Total Transactions</div><div class="value blue">284,807</div></div>
+    <div class="stat"><div class="label">Fraud Cases</div><div class="value red">492</div></div>
+    <div class="stat"><div class="label">F1-Score</div><div class="value green">87%</div></div>
+    <div class="stat"><div class="label">ROC-AUC</div><div class="value yellow">0.97</div></div>
 </div>
 
 <div class="section">
@@ -81,26 +88,88 @@
 </div>
 
 <div class="section">
-    <h2>🎯 Live Fraud Prediction</h2>
-    <p style="color:#94a3b8; font-size:13px; margin-bottom:10px;">
-        Click a button to test the model:
-    </p>
+    <h2>🎯 Quick Test</h2>
+    <p style="color:#94a3b8; font-size:13px; margin-bottom:10px;">Test with sample transactions:</p>
     <div>
-        <button class="btn btn-normal" onclick="test('normal')">✅ Normal Transaction</button>
-        <button class="btn btn-fraud" onclick="test('fraud')">🚨 Fraud Transaction</button>
+        <button class="btn btn-normal" onclick="test('normal')">✅ Normal</button>
+        <button class="btn btn-fraud" onclick="test('fraud')">🚨 Fraud</button>
         <button class="btn btn-random" onclick="test('random')">🎲 Random</button>
     </div>
     <div class="loading" id="loading">⏳ Analyzing...</div>
     <div class="result" id="result">
         <h3 id="rTitle"></h3>
-        <p id="rProb"></p>
+        <p id="rProb" style="color:#cbd5e1; margin-bottom:10px;"></p>
         <div class="bar-bg"><div class="bar-fill" id="rBar"></div></div>
-        <p id="rDetail" style="margin-top:8px; font-size:12px;"></p>
+        <p id="rDetail" style="margin-top:8px; font-size:12px; color:#94a3b8;"></p>
+    </div>
+</div>
+
+<!-- CSV Upload Section -->
+<div class="section">
+    <h2>📂 Upload Your CSV File</h2>
+    <p style="color:#94a3b8; font-size:13px; margin-bottom:15px;">
+        Upload a CSV file with transaction data and get fraud predictions for every row!
+        <br>CSV must have columns: V1-V28, Amount, Time
+    </p>
+
+    <div class="upload-box" onclick="document.getElementById('csvFile').click()">
+        <input type="file" id="csvFile" accept=".csv" onchange="handleCSV(this)">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">Click to upload your CSV file</div>
+        <div class="upload-hint">Supports .csv files with V1-V28, Amount, Time columns</div>
+    </div>
+
+    <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div id="csvLoading" style="display:none; color:#60a5fa; padding:10px 0;">
+        ⏳ Analyzing transactions... <span id="csvProgress">0/0</span>
+    </div>
+
+    <div id="csvResults" style="display:none;">
+        <div class="csv-stats">
+            <div class="csv-stat">
+                <div class="cl">Total Rows</div>
+                <div class="cv blue" id="csvTotal">0</div>
+            </div>
+            <div class="csv-stat">
+                <div class="cl">Fraud Found</div>
+                <div class="cv red" id="csvFraud">0</div>
+            </div>
+            <div class="csv-stat">
+                <div class="cl">Normal</div>
+                <div class="cv green" id="csvNormal">0</div>
+            </div>
+            <div class="csv-stat">
+                <div class="cl">Fraud Rate</div>
+                <div class="cv yellow" id="csvRate">0%</div>
+            </div>
+        </div>
+
+        <canvas id="csvChart" style="max-height:180px; margin-bottom:15px;"></canvas>
+
+        <button class="download-btn" onclick="downloadResults()">⬇️ Download Results CSV</button>
+
+        <div style="margin-top:15px; overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Amount</th>
+                        <th>Result</th>
+                        <th>Probability</th>
+                        <th>Risk</th>
+                    </tr>
+                </thead>
+                <tbody id="csvTable"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <div class="section">
-    <h2>📋 Prediction History</h2>
+    <h2>📋 Quick Test History</h2>
     <table>
         <thead>
             <tr><th>#</th><th>Time</th><th>Amount</th><th>Result</th><th>Prob</th><th>Risk</th></tr>
@@ -114,6 +183,8 @@
 <script>
 const API = "https://fraud-detection-api-kt28.onrender.com";
 let count = 0;
+let csvResultsData = [];
+let csvChartInstance = null;
 
 const samples = {
     normal: {V1:-1.36,V2:-0.07,V3:2.54,V4:1.38,V5:-0.34,V6:0.46,V7:0.24,V8:0.10,V9:0.36,V10:0.09,V11:-0.55,V12:-0.62,V13:-0.99,V14:-0.31,V15:1.47,V16:-0.47,V17:0.21,V18:0.03,V19:0.40,V20:0.25,V21:-0.02,V22:0.28,V23:-0.11,V24:0.07,V25:0.13,V26:-0.19,V27:0.13,V28:-0.02,Amount:149.62,Time:406.0},
@@ -133,16 +204,12 @@ async function test(type) {
     document.getElementById('loading').style.display = 'block';
     document.getElementById('result').style.display = 'none';
     try {
-        const res = await fetch(`${API}/predict`, {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(data)
-        });
+        const res = await fetch(`${API}/predict`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
         const r = await res.json();
         showResult(r, data.Amount);
     } catch(e) {
         document.getElementById('loading').style.display = 'none';
-        alert('API is waking up! Wait 30 seconds and try again.');
+        alert('API waking up! Wait 30 seconds and try again.');
     }
 }
 
@@ -165,6 +232,113 @@ function showResult(r, amount) {
     tbody.innerHTML = `<tr><td>${count}</td><td>${new Date().toLocaleTimeString()}</td><td>$${amount}</td><td>${fb}</td><td>${(r.fraud_probability*100).toFixed(1)}%</td><td>${rb}</td></tr>` + tbody.innerHTML;
 }
 
+// CSV Upload
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,''));
+    const rows = [];
+    for(let i=1; i<lines.length; i++) {
+        if(!lines[i].trim()) continue;
+        const vals = lines[i].split(',');
+        const row = {};
+        headers.forEach((h,j) => row[h] = parseFloat(vals[j]) || 0);
+        rows.push(row);
+    }
+    return rows;
+}
+
+async function handleCSV(input) {
+    const file = input.files[0];
+    if(!file) return;
+
+    const text = await file.text();
+    const rows = parseCSV(text);
+
+    if(rows.length === 0) { alert('CSV is empty!'); return; }
+    if(!rows[0].hasOwnProperty('V1')) { alert('CSV must have columns V1-V28, Amount, Time'); return; }
+
+    document.getElementById('csvLoading').style.display = 'block';
+    document.getElementById('csvResults').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'block';
+
+    csvResultsData = [];
+    let fraudCount = 0;
+    let normalCount = 0;
+
+    for(let i=0; i<rows.length; i++) {
+        document.getElementById('csvProgress').textContent = `${i+1}/${rows.length}`;
+        document.getElementById('progressFill').style.width = ((i+1)/rows.length*100)+'%';
+
+        try {
+            const res = await fetch(`${API}/predict`, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(rows[i])
+            });
+            const r = await res.json();
+            csvResultsData.push({...rows[i], ...r});
+            if(r.is_fraud) fraudCount++; else normalCount++;
+        } catch(e) {
+            csvResultsData.push({...rows[i], is_fraud: false, fraud_probability: 0, risk_level: 'ERROR'});
+            normalCount++;
+        }
+    }
+
+    document.getElementById('csvLoading').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'none';
+    document.getElementById('csvResults').style.display = 'block';
+
+    // Update stats
+    const total = rows.length;
+    document.getElementById('csvTotal').textContent = total;
+    document.getElementById('csvFraud').textContent = fraudCount;
+    document.getElementById('csvNormal').textContent = normalCount;
+    document.getElementById('csvRate').textContent = (fraudCount/total*100).toFixed(2)+'%';
+
+    // Chart
+    if(csvChartInstance) csvChartInstance.destroy();
+    csvChartInstance = new Chart(document.getElementById('csvChart'), {
+        type: 'doughnut',
+        data: {
+            labels: [`Normal (${normalCount})`, `Fraud (${fraudCount})`],
+            datasets: [{ data: [normalCount, fraudCount], backgroundColor: ['#3b82f6','#ef4444'], borderWidth: 0 }]
+        },
+        options: { plugins: { legend: { labels: { color: '#94a3b8' } } } }
+    });
+
+    // Table
+    const tbody = document.getElementById('csvTable');
+    tbody.innerHTML = csvResultsData.slice(0,50).map((r,i) => `
+        <tr>
+            <td>${i+1}</td>
+            <td>$${r.Amount ? r.Amount.toFixed(2) : '0'}</td>
+            <td>${r.is_fraud ? '<span class="badge b-fraud">FRAUD</span>' : '<span class="badge b-normal">NORMAL</span>'}</td>
+            <td>${(r.fraud_probability*100).toFixed(1)}%</td>
+            <td><span class="badge b-${r.risk_level ? r.risk_level.toLowerCase() : 'low'}">${r.risk_level || 'LOW'}</span></td>
+        </tr>
+    `).join('');
+
+    if(rows.length > 50) {
+        tbody.innerHTML += `<tr><td colspan="5" style="color:#64748b; text-align:center; padding:10px;">Showing first 50 of ${rows.length} rows. Download CSV for full results.</td></tr>`;
+    }
+}
+
+function downloadResults() {
+    if(csvResultsData.length === 0) return;
+    const headers = ['Row','Amount','Time','is_fraud','fraud_probability','risk_level'];
+    const rows = csvResultsData.map((r,i) =>
+        `${i+1},${r.Amount||0},${r.Time||0},${r.is_fraud},${r.fraud_probability},${r.risk_level}`
+    );
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fraud_predictions.csv';
+    a.click();
+}
+
+// Charts
 new Chart(document.getElementById('distChart'),{
     type:'doughnut',
     data:{labels:['Normal (99.83%)','Fraud (0.17%)'],datasets:[{data:[284315,492],backgroundColor:['#3b82f6','#ef4444'],borderWidth:0}]},
