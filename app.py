@@ -1,3 +1,5 @@
+
+
 """
 Credit Card Fraud Detection API
 Author: Divyansh Pandit
@@ -51,7 +53,7 @@ def predict(t: Transaction):
     ]])
     
     prediction = model.predict(features)[0]
-probability = model.predict_proba(features)[0][1]
+    probability = model.predict_proba(features)[0][1]
 
 # Lower threshold to 0.3 instead of default 0.5
 is_fraud = bool(probability >= 0.3)
