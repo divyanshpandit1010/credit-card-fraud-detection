@@ -21,6 +21,8 @@ ML model to detect fraudulent credit card transactions, deployed as a live REST 
 
 ## Live API
 https://fraud-detection-api-kt28.onrender.com/docs
+## Live demo
+https://fraud-detection-api-kt28.onrender.com/dashboard
 
 ## How to Run Locally
 pip install -r requirements.txt
