@@ -31,11 +31,11 @@ class Transaction(BaseModel):
 
 @app.get("/")
 def home():
-    return FileResponse("dashboard.html")
+    return FileResponse("./dashboard.html")
 
 @app.get("/dashboard")
 def dashboard():
-    return FileResponse("dashboard.html")
+    return FileResponse("./dashboard.html")
 
 @app.post("/predict")
 def predict(t: Transaction):
